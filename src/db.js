@@ -9,4 +9,16 @@ const db = new Sequelize({
   loggin: true,
 });
 
-module.exports = db;
+(async function runDB() {
+  try {
+    await db.authenticate();
+    console.log("database connected !");
+  } catch (error) {
+    console.log(error);
+    await db.close();
+  }
+})();
+
+const userModel = require("./models/user.model")(db);
+
+module.exports = { db, userModel };

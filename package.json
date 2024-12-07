@@ -5,7 +5,7 @@
   "scripts": {
     "db": "sequelize db:create --config ./src/configSequelize.js",
     "migrate": "sequelize db:migrate --config ./src/configSequelize.js",
-    "dev": "nodemon ./src/index.js",
+    "dev": "nodemon --ignore ./src/mini_db.json ./src/index.js",
     "start": "dotenv -e .env npm run db && dotenv -e .env npm run migrate && dotenv -e .env npm run dev"
   },
   "keywords": [],

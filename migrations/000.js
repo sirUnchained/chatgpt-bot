@@ -9,9 +9,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      fullname: {
+      name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      chatId: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
+      },
+      used_count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
