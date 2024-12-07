@@ -1,9 +1,3 @@
-// const { Redis } = require("ioredis");
-
-// const redis = new Redis(process.env.REDIS_URI);
-
-// module.exports = redis;
-
 const fs = require("node:fs");
 const db = require("./mini_db.json");
 
@@ -54,6 +48,16 @@ const update = (chatId, key, value) => {
   return true;
 };
 
-// console.log(update(12345, "action", "gpt40"));
+create(3879, "action");
 
 module.exports = { findOne, create, remove, update };
+
+setInterval(() => {
+  let time;
+  db.forEach((item) => {
+    time = new Date(item.createdAt);
+    if (time + 2 * 60 * 60 * 1000 < time) {
+      remove("id", item.id);
+    }
+  });
+}, 2 * 60 * 60 * 1000);

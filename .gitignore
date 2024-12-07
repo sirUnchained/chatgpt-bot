@@ -2,3 +2,5 @@
 node_modules
 package-lock.json
 .gitignore
+mini_db.json
+.gitignore
