@@ -46,20 +46,23 @@ bot.on("text", async (ctx) => {
 
   const pleasWaitMsg = await ctx.reply("لطفا کمی صبر کنید ...");
 
-  const action = mini_db_controller.findOne("chatId", chatId);
-  const response = await fetch(`https://api.one-api.ir/chatbot/v1/${action}`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "one-api-token": process.env.API_TOKEN,
-    },
-    body: JSON.stringify([
-      {
-        role: "user",
-        content: userText,
+  const chosenAction = mini_db_controller.findOne("chatId", chatId);
+  const response = await fetch(
+    `https://api.one-api.ir/chatbot/v1/${chosenAction.action}`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "one-api-token": process.env.API_TOKEN,
       },
-    ]),
-  });
+      body: JSON.stringify([
+        {
+          role: "user",
+          content: userText,
+        },
+      ]),
+    }
+  );
   const result = await response.json();
   const robotMsg = result.result[0]
     .replace(/\-/g, "\\-")
